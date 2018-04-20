@@ -4,13 +4,28 @@
 # axes and z is height
 ########################################################################
 class Point3D:
-    values = [0.0,0.0,0.0]
-    def __init__(self, values = [0.0,0.0,0.0]):
-        self.values = values
+    values = [0.0, 0.0, 0.0]
+    def __init__(self, x = 0.0, y = 0.0, z = 0.0):
+        self.values[0] = x
+        self.values[1] = y
+        self.values[2] = z
     def getValues(self):
         return self.values
+    def getXVal(self):
+        return self.values[0]
+    def getYVal(self):
+        return self.values[1]
+    def getZVal(self):
+        return self.values[2]
     def setValues(self, values):
         self.values = values
+    def setXValue(self, value):
+        self.setValues([value, self.values[1], self.values[2]])
+    def setYValue(self, value):
+        self.setValues([self.values[0], value, self.values[2]])
+    def setZValue(self, value):
+        self.setValues([self.values[0], self.values[1], value])
+
 
 class Plane:
     points = [Point3D,Point3D,Point3D]
