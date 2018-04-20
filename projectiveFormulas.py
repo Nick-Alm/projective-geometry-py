@@ -54,5 +54,9 @@ class TwoPointsOperation():
         distance = math.sqrt(((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1))+((z2-z1)*(z2-z1)))
         return distance
     def getCosFromSides(self, oppositeSide, sideOne, sideTwo):
+        if(sideOne==0):
+            return 1.0
+        elif(sideTwo==0):
+            return 0.0
         cosine = (math.pow(sideOne,2) + math.pow(sideTwo,2) - math.pow(oppositeSide, 2)) / (2 * sideOne * sideTwo)
         return cosine
