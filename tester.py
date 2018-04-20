@@ -4,4 +4,4 @@ squarePoints = [[-10,10,0],[10,10,0],[10,-10,0],[-10,-10,0]]
 
 square = Object3D()
 
-print(square.planes.points)
+print(square.getPointValues())
