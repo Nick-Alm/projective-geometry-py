@@ -4,8 +4,8 @@
 # axes and z is height
 ########################################################################
 class Point3D:
-    values = [0,0,0]
-    def __init__(self, values = [0,0,0]):
+    values = [0.0,0.0,0.0]
+    def __init__(self, values = [0.0,0.0,0.0]):
         self.values = values
     def getValues(self):
         return self.values
