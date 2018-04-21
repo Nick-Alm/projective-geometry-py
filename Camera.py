@@ -71,6 +71,6 @@ class Camera():
         degree = math.radians(1.0)
         self.changeCartesianAngle(degree)
         newVanishPoint = Point3D()
-        newVanishPoint.setXValue(self.viewField * math.cos(self.getCartesianAngle()))
-        newVanishPoint.setYValue(self.viewField * math.sin(self.getCartesianAngle()))
+        newVanishPoint.setXValue(self.viewField * math.sin(self.getCartesianAngle()))
+        newVanishPoint.setYValue(self.viewField * math.cos(self.getCartesianAngle()))
         self.setVanishPoint(newVanishPoint)        

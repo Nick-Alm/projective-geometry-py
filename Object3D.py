@@ -63,11 +63,3 @@ class Object3D:
         for i in range(len(pointList)):
             valueList.append(pointList[i].getValues())
         return valueList
-    
-
-
-
-
-
-
-        
