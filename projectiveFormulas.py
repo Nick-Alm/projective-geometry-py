@@ -18,7 +18,7 @@ class TwoPointsOperation():
         cosine = self.getCosFromSides(oppositeSideLength, sideOneLength, sideTwoLength)
         pitch = math.acos(cosine)
         return pitch
-    def getYaw(self, pointOne, pointTwo):
+    def getYaw(self, pointOne, pointTwo): # This will need to be fixed to accomodate negative angles    
         oppositeSideLength = self.getHorizontalXDistance(pointOne, pointTwo)
         sideOneLength = self.getHorizontalYDistance(pointOne, pointTwo)
         sideTwoLength = self.getDirectDistance(pointOne, pointTwo)

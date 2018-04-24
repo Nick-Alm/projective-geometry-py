@@ -44,7 +44,7 @@ print('viewport angle after rotation:')
 print(viewport.getCartesianAngle())
 print('')
 viewport.rotateRight()
-viewport.rotateRight()
+
 viewport.rotateRight()
 viewport.rotateRight()
 viewport.rotateRight()

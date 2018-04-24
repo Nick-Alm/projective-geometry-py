@@ -1,4 +1,4 @@
-from Object3D import Point3D
+from Object3D import Point3D, Plane
 from projectiveFormulas import *
 
 class Camera():
@@ -8,6 +8,7 @@ class Camera():
     windowSize = (500,300)
     windowDistance = 10.0
     cartesianAngle = 0.0
+    verticalAngle = 0.0
     def __init__(self, focalPoint = Point3D(), vanishPoint = Point3D(), windowSize = (500,300) , windowDistance = 10.0):
         self.focalPoint = focalPoint
         self.vanishPoint = vanishPoint
@@ -29,13 +30,15 @@ class Camera():
     def getVanishPoint(self):
         return self.vanishPoint    
     def findWindowPoints(self):
+        
         return [Point3D]
     def getCartesianAngle(self):
         return self.cartesianAngle
     def getWindowCenter(self):
         twoPointsOp = TwoPointsOperation(self.focalPoint, self.vanishPoint)
         pitch = twoPointsOp.getPitch(self.focalPoint, self.vanishPoint)
-        yaw = twoPointsOp.getYaw(self.focalPoint, self.vanishPoint)
+        # yaw = twoPointsOp.getYaw(self.focalPoint, self.vanishPoint)
+        yaw = self.getCartesianAngle()
         zValue = self.getZValue(pitch, self.windowDistance)
         xValue = self.getXValue(yaw, self.windowDistance)
         yValue = self.getYValue(yaw, self.windowDistance)
@@ -73,4 +76,4 @@ class Camera():
         newVanishPoint = Point3D()
         newVanishPoint.setXValue(self.viewField * math.sin(self.getCartesianAngle()))
         newVanishPoint.setYValue(self.viewField * math.cos(self.getCartesianAngle()))
-        self.setVanishPoint(newVanishPoint)        
+        self.setVanishPoint(newVanishPoint)
