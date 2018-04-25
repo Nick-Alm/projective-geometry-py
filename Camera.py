@@ -10,7 +10,7 @@ class Camera():
     cartesianAngle = 0.0
     verticalAngle = 0.0
     window = Plane()
-    def __init__(self, focalPoint = Point3D(), vanishPoint = Point3D(), windowSize = (500,300) , windowDistance = 10.0):
+    def __init__(self, focalPoint = Point3D(), vanishPoint = Point3D(), windowSize = (500.0 , 300.0) , windowDistance = 10.0):
         self.focalPoint = focalPoint
         self.vanishPoint = vanishPoint
         self.windowSize = windowSize
@@ -27,6 +27,8 @@ class Camera():
         self.focalPoint = point
     def setVanishPoint(self, point):
         self.vanishPoint = point
+    def setWindowDistance(self, value):
+        self.windowDistance = value
     def getFocalPoint(self):
         return self.focalPoint
     def getVanishPoint(self):
