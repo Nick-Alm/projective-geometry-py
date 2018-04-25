@@ -5,14 +5,11 @@
 from Object3D import Point3D
 import math
 
-def planeEquation(camera):
+def planeEquation(camera, normalVectors):
     points = camera.window.getPoints()
-    upperLeft = points[0]
-    upperRight = points[1]
-    lowerLeft = points[2]
-    lowerRight = points[3]
-    vectorOne = [upperRight.getXVal() - lowerLeft.getXVal(), upperRight.getYVal() - lowerLeft.getYVal(), upperRight.getZVal() - lowerLeft.getZVal()]
-    vectorTwo = [upperLeft.getXVal() - lowerRight.getXVal(), upperLeft.getYVal() - lowerRight.getYVal(), upperLeft.getZVal() - lowerRight.getZVal()]
+    normalVector = getNormalVector(camera)
+    constantD = (points[0][0] * normalVector[0]) + (points[0][1] * normalVector[1]) + (points[0][2] * normalVector[2])
+    
 def getTwoVectors(camera):
     points = camera.window.getPoints()
     upperLeft = points[0]
@@ -24,6 +21,13 @@ def getTwoVectors(camera):
     return [vectorOne, vectorTwo]
 def getNormalVector(camera):
     vectors = getTwoVectors(camera)
+    vectorOne = vectors[0]
+    vectorTwo = vectors[1]
+    normalVectorX = (vectorOne[1] * vectorTwo[2]) - (vectorOne[2] * vectorTwo[1])
+    normalVectorY = -((vectorOne[0] * vectorTwo[2]) - (vectorOne[2] * vectorTwo[0]))
+    normalVectorZ = (vectorOne[0] * vectorTwo[1]) - (vectorOne[1] * vectorTwo[0])
+    normalVector = [normalVectorX, normalVectorY, normalVectorZ]
+    return normalVector
 class TwoPointsOperation():
     pointOne = Point3D()
     pointTwo = Point3D()
