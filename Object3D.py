@@ -28,7 +28,7 @@ class Point3D:
 
 
 class Plane:
-    points = [Point3D,Point3D,Point3D]
+    points = [Point3D(),Point3D(),Point3D()]
     def __init__(self, points = [Point3D(),Point3D(),Point3D()]):
         self.points = points
     def getPoints(self):
@@ -37,7 +37,10 @@ class Plane:
         valueList = []
         for i in range(len(self.points)):
             valueList.append(self.points[i].getValues)
-        return valueList            
+        return valueList       
+    def printPointValues(self):
+        for i in range(len(self.getPoints())):
+            print(self.getPoints()[i].getValues())     
     def setPoints(self, points):
         self.points = points
     def setPointsFromValues(self, values):

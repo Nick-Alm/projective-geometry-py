@@ -5,10 +5,11 @@ class Camera():
     focalPoint = Point3D()
     vanishPoint = Point3D()
     viewField = 0.0
-    windowSize = (500,300)
+    windowSize = [500.0, 300.0]
     windowDistance = 10.0
     cartesianAngle = 0.0
     verticalAngle = 0.0
+    window = Plane()
     def __init__(self, focalPoint = Point3D(), vanishPoint = Point3D(), windowSize = (500,300) , windowDistance = 10.0):
         self.focalPoint = focalPoint
         self.vanishPoint = vanishPoint
@@ -29,9 +30,36 @@ class Camera():
         return self.focalPoint
     def getVanishPoint(self):
         return self.vanishPoint    
-    def findWindowPoints(self):
-        
-        return [Point3D]
+    def updateWindowPoints(self):
+        rayLength = math.sqrt(math.pow(self.windowDistance, 2)+math.pow((.5 * self.windowSize[0]), 2))
+        leftAngle = - math.atan((self.windowSize[0]*.5)/(self.windowDistance))
+        rightAngle = - leftAngle
+        leftAngle += self.cartesianAngle
+        rightAngle += self.cartesianAngle
+        leftPointXVal = rayLength * math.sin(leftAngle)
+        leftPointYVal = rayLength * math.cos(leftAngle)
+        rightPointXVal = rayLength * math.sin(rightAngle)
+        rightPointYVal = rayLength * math.cos(rightAngle)
+        upperZValue = self.windowSize[1] * .5
+        lowerZValue = - self.windowSize[1] * .5
+        upperLeft = Point3D()
+        lowerLeft = Point3D()
+        upperRight = Point3D()
+        lowerRight = Point3D()
+        upperLeft.setXValue(leftPointXVal)
+        lowerLeft.setXValue(leftPointXVal)
+        upperRight.setXValue(rightPointXVal)
+        lowerRight.setXValue(rightPointXVal)
+        upperLeft.setYValue(leftPointYVal)
+        lowerLeft.setYValue(leftPointYVal)
+        upperRight.setYValue(rightPointYVal)
+        lowerRight.setYValue(rightPointYVal)
+        upperLeft.setZValue(upperZValue)
+        upperRight.setZValue(upperZValue)
+        lowerLeft.setZValue(lowerZValue)
+        lowerRight.setZValue(lowerZValue)
+        windowPoints = [upperLeft, upperRight, lowerLeft, lowerRight]
+        self.window.setPoints(windowPoints)
     def getCartesianAngle(self):
         return self.cartesianAngle
     def getWindowCenter(self):
@@ -70,6 +98,11 @@ class Camera():
         newVanishPoint.setXValue(self.viewField * math.sin(self.getCartesianAngle()))
         newVanishPoint.setYValue(self.viewField * math.cos(self.getCartesianAngle()))
         self.setVanishPoint(newVanishPoint)
+        self.updateWindowPoints()
+        print(self.cartesianAngle)
+        print('windowValues after left rotation')
+        self.window.printPointValues()
+        print('break')
     def rotateRight(self): # rotate camera right by 1 degree
         degree = math.radians(1.0)
         self.changeCartesianAngle(degree)
@@ -77,3 +110,8 @@ class Camera():
         newVanishPoint.setXValue(self.viewField * math.sin(self.getCartesianAngle()))
         newVanishPoint.setYValue(self.viewField * math.cos(self.getCartesianAngle()))
         self.setVanishPoint(newVanishPoint)
+        self.updateWindowPoints()
+        print(self.cartesianAngle)
+        print('windowValues after right rotation')
+        self.window.printPointValues()
+        print('break')
