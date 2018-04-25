@@ -35,6 +35,15 @@ def getNormalVector(camera):
     normalVectorZ = (vectorOne[0] * vectorTwo[1]) - (vectorOne[1] * vectorTwo[0])
     normalVector = [normalVectorX, normalVectorY, normalVectorZ]
     return normalVector
+def get3dDistance(pointOne, pointTwo):
+    x1 = pointOne.getXVal()
+    x2 = pointTwo.getXVal()
+    y1 = pointOne.getYVal()
+    y2 = pointTwo.getYVal()
+    z1 = pointOne.getZVal()
+    z2 = pointTwo.getZVal()
+    distance = math.sqrt(((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1))+((z2-z1)*(z2-z1)))
+    return distance
 class TwoPointsOperation():
     pointOne = Point3D()
     pointTwo = Point3D()

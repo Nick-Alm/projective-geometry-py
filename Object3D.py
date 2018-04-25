@@ -6,9 +6,9 @@
 class Point3D:
     values = [0.0, 0.0, 0.0]
     def __init__(self, x = 0.0, y = 0.0, z = 0.0):
-        self.values[0] = x
-        self.values[1] = y
-        self.values[2] = z
+        self.setXValue(x)
+        self.setYValue(y)
+        self.setZValue(z)
     def getValues(self):
         return self.values
     def getXVal(self):
@@ -66,3 +66,15 @@ class Object3D:
         for i in range(len(pointList)):
             valueList.append(pointList[i].getValues())
         return valueList
+class Cube:
+    centerPoint = Point3D()
+    size = 10.0
+    planes = [Plane(), Plane(), Plane(), Plane(), Plane(), Plane()]
+    def __init__(self, centerPoint, size):
+        self.centerPoint = centerPoint
+        self.size = size
+    def initiatePlanes(self):
+        for i in range(len(self.planes)):
+            pass
+    def createPlane(self):
+        pass
