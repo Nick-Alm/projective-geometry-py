@@ -5,11 +5,18 @@
 from Object3D import Point3D
 import math
 
-def planeEquation(camera, normalVectors):
+def getIntersectionWithWindow(camera, pointInSpace):
     points = camera.window.getPoints()
     normalVector = getNormalVector(camera)
-    constantD = (points[0][0] * normalVector[0]) + (points[0][1] * normalVector[1]) + (points[0][2] * normalVector[2])
-    
+    constantD = (points[0].getXVal() * normalVector[0]) + (points[0].getYVal() * normalVector[1]) + (points[0].getZVal() * normalVector[2])
+    topOfT = (constantD - (normalVector[0] * camera.focalPoint.getXVal()) - (normalVector[1] * camera.focalPoint.getYVal()) - (normalVector[2] * camera.focalPoint.getZVal()))
+    bottomOfT = ((normalVector[0] * pointInSpace.getXVal()) - (normalVector[0] * camera.focalPoint.getXVal()) + (normalVector[1] * pointInSpace.getYVal()) - (normalVector[1] * camera.focalPoint.getYVal()) + (normalVector[2] * pointInSpace.getZVal()) - (normalVector[2] * camera.focalPoint.getZVal()))
+    t = topOfT / bottomOfT
+    intersectingPoint = Point3D()
+    intersectingPoint.setXValue(camera.focalPoint.getXVal() + (t * (pointInSpace.getXVal() - camera.focalPoint.getXVal())))
+    intersectingPoint.setYValue(camera.focalPoint.getYVal() + (t * (pointInSpace.getYVal() - camera.focalPoint.getYVal())))
+    intersectingPoint.setZValue(camera.focalPoint.getZVal() + (t * (pointInSpace.getZVal() - camera.focalPoint.getZVal())))
+    return intersectingPoint
 def getTwoVectors(camera):
     points = camera.window.getPoints()
     upperLeft = points[0]

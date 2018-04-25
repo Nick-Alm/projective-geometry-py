@@ -1,5 +1,5 @@
 from Object3D import *
-from projectiveFormulas import TwoPointsOperation
+from projectiveFormulas import *
 from Camera import Camera
 
 squarePoints = [[-10,10,0],[10,10,0],[10,-10,0],[-10,-10,0]]
@@ -58,3 +58,6 @@ print('viewfield after right rotation:')
 print(viewport.getViewField())
 print('viewport angle after right rotation:')
 print(viewport.getCartesianAngle())
+
+print('window intersection:')
+print(getIntersectionWithWindow(viewport, viewport.getVanishPoint()).getValues())
