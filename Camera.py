@@ -19,6 +19,8 @@ class Camera():
         self.setVanishPoint(vanishPoint)
         self.setViewField()
         self.updateWindowPoints()
+    def setWindowSize(self, values):
+        self.windowSize = values
     def setViewField(self):
         formulaInstance = TwoPointsOperation(self.getFocalPoint(), self.getVanishPoint())
         newViewField = formulaInstance.getDirectDistance(self.getFocalPoint(), self.getVanishPoint())
