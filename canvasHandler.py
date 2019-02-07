@@ -10,10 +10,13 @@ c = Canvas(width = width, height = height, bg = 'white')
 c.pack(expand=YES, fill = BOTH)
 testVanishPoint = Point3D()
 testVanishPoint.setYValue(10.0)
+testFocalPoint = Point3D()
+testFocalPoint.setYValue(100.0)
 viewport = Camera()
 viewport.setVanishPoint(testVanishPoint)
 viewport.setWindowDistance(50.0)
 viewport.setWindowSize([width, height])
+viewport.setFocalPoint(testFocalPoint)
 
 pointOne = Point3D(-20.0, 5.0, 20.0)
 pointTwo = Point3D(20.0, 5.0, 20.0)
@@ -62,12 +65,17 @@ def renderPlane(c, camera, object):
     for i in range(len(points)):
         polygonVertices.append(translateToCanvas(points[i], camera))
     polygonVertices.append(translateToCanvas(points[0], camera))
-    c.create_polygon(polygonVertices, fill = 'green', outline = 'black')
+    c.create_polygon(polygonVertices,fill = 'green', stipple='gray50',  outline = 'black')
 
 
 def testRotate(camera):
     for i in range(5):
         camera.rotateLeft()
+testRotate(viewport)
+testRotate(viewport)
+testRotate(viewport)
+testRotate(viewport)
+testRotate(viewport)
 testRotate(viewport)
 testRotate(viewport)
 renderPlane(c, viewport, testPlane)
